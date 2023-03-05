@@ -1,0 +1,143 @@
+$main-color: #818cd9;
+
+.table {
+  border-collapse: collapse;
+
+  thead {
+    background: #6c7ae0;
+    color: white;
+
+    th {
+      padding: 15px;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8f6ff;
+  }
+
+  td {
+    font-size: 15px;
+    color: gray;
+    line-height: 1.4;
+    padding: 15px;
+    text-align: center;
+  }
+}
+
+.button-sort {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  &:hover {
+    background: $main-color;
+  }
+
+  &:active {
+    box-shadow: 0px 0px 15px -3px rgba(34, 60, 80, 0.2) inset;
+  }
+}
+
+.button {
+  background: $main-color;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-weight: 700;
+
+  &-load {
+    margin-bottom: 20px;
+    &:disabled {
+      opacity: 0.7;
+      background: gray;
+      cursor: initial;
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    box-shadow: 0px 0px 15px -3px rgba(34, 60, 80, 0.2) inset;
+  }
+
+  &-form {
+    &-reset {
+      background: #eb9999;
+    }
+  }
+}
+
+.table-pagination-wrapper {
+  text-align: center;
+  margin-top: 20px;
+
+  .table-pagination {
+    width: max-content;
+    margin: auto;
+
+    button {
+      margin-right: 10px;
+      background: none;
+      border: 1px solid gray;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background: $main-color;
+        font-weight: bolder;
+        color: white;
+      }
+
+      &:active {
+        box-shadow: 0px 0px 15px -3px rgba(34, 60, 80, 0.2) inset;
+      }
+
+      &.active {
+        background: $main-color;
+        font-weight: bolder;
+        color: white;
+      }
+    }
+  }
+}
+
+.table-filters {
+  margin-bottom: 20px;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+
+    .input-item {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 5px;
+      }
+
+      input {
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid gray;
+      }
+    }
+  }
+}

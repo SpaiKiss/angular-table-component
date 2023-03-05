@@ -1,0 +1,93 @@
+<button
+  (click)="loadTableData()"
+  [disabled]="tableData.length > 0"
+  class="button button-load"
+>
+  Загрузить данные в таблицу
+</button>
+<div *ngIf="isLoading">Загрузка...</div>
+<div class="table-filters" *ngIf="tableData.length > 0">
+  <form [formGroup]="formTableFilter">
+    <div class="input-item">
+      <label>Имя</label>
+      <input formControlName="name" type="text" placeholder="Имя" />
+    </div>
+    <div class="input-item">
+      <label>Минимальное кол-во отзывов</label>
+      <input
+        formControlName="reviewsCountMin"
+        type="number"
+        min="0"
+        placeholder="Кол-во отзывов"
+      />
+    </div>
+    <div class="input-item">
+      <label>Максимальное кол-во отзывов</label>
+      <input
+        formControlName="reviewsCountMax"
+        type="number"
+        min="0"
+        placeholder="Кол-во заказов"
+      />
+    </div>
+    <div class="actions">
+      <button class="button button-form" (click)="tableFilter()">
+        Фильтровать
+      </button>
+      <button class="button button-form-reset" (click)="resetFilter()">
+        Сбросить
+      </button>
+    </div>
+  </form>
+</div>
+<table *ngIf="tableData.length > 0" class="table">
+  <thead>
+    <tr>
+      <th>Аватарка</th>
+      <th *ngFor="let column of columns">
+        <button
+          (click)="sort(column.propName); sortReverse = !sortReverse"
+          class="button-sort"
+        >
+          {{ column.colName }}
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of tableCurrentPage">
+      <td><img [src]="item.image" /></td>
+      <td>{{ item.wbRating }}</td>
+      <td>{{ item.reviewsCount }}</td>
+      <td>{{ item.nomenclature }}</td>
+      <td>{{ item.sku }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.brandName }}</td>
+      <td>{{ item.ordered }}</td>
+      <td>{{ item.soldQuantity }}</td>
+      <td>{{ item.soldAmount }}</td>
+      <td>{{ item.orderedAmount }}</td>
+      <td>{{ item.availability }}</td>
+    </tr>
+    <tr *ngIf="!tableCurrentPage.length">
+      Результатов не найдено
+    </tr>
+  </tbody>
+</table>
+<div
+  class="table-pagination-wrapper"
+  *ngIf="paginationItems.length > 0 && !filtered"
+>
+  <div class="table-pagination">
+    <button
+      *ngFor="let item of paginationItems"
+      (click)="
+        setItemTableCurrentPage(item * rowsOnTablePage);
+        activePaginationItem = item + 1
+      "
+      [ngClass]="{ active: item + 1 === activePaginationItem }"
+    >
+      {{ item + 1 }}
+    </button>
+  </div>
+</div>
